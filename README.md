@@ -141,6 +141,21 @@ python chatbot.py
 
 ---
 
+### Option C: Deploy to Render (Cloud Hosting)
+
+This repository includes a `render.yaml` and `Procfile` configured for 1-click Render deployment:
+
+1. Sign in to [Render.com](https://render.com).
+2. Click **New +** ➔ **Web Service**.
+3. Connect your GitHub repository: `suhani-shinde1812/personal-python-chatbot`.
+4. Render will auto-fill the settings:
+   - **Environment**: `Python`
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `gunicorn app:app`
+5. Click **Create Web Service** (Free tier). Render will build and provide a live public URL (e.g. `https://personal-python-chatbot.onrender.com`).
+
+---
+
 ## 🧪 Running Automated Tests
 
 Run the test suite to verify question matching, text cleaning, paraphrase recognition, and fallback handling:
