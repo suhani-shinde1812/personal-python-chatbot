@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyBot — Personal Python QA Chatbot</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <div>
+                    <h2>PyBot</h2>
+                    <span class="subtext">Python QA Assistant</span>
+                </div>
+            </div>
+
+            <!-- Stats Widget -->
+            <div class="stats-card">
+                <div class="stat-item">
+                    <span class="stat-num" id="total-kb-count">--</span>
+                    <span class="stat-label">KB Entries</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-num" id="total-topics-count">--</span>
+                    <span class="stat-label">Core Topics</span>
+                </div>
+            </div>
+
+            <!-- Quick Topics -->
+            <div class="sidebar-section">
+                <h3 class="section-title">Knowledge Topics</h3>
+                <div class="topics-pills" id="topics-list">
+                    <!-- Populated dynamically -->
+                    <span class="topic-tag active" data-topic="all">All Topics</span>
+                </div>
+            </div>
+
+            <!-- Sample Prompts -->
+            <div class="sidebar-section">
+                <h3 class="section-title">Sample Inquiries</h3>
+                <div class="sample-questions-list" id="sidebar-samples">
+                    <!-- Populated dynamically -->
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <button id="clear-chat-btn" class="secondary-btn" title="Clear conversation history">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"></path>
+                    </svg>
+                    Clear History
+                </button>
+                <div class="engine-badge">
+                    <span class="engine-dot"></span>
+                    <span>NLP: TF-IDF + Cosine</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="chat-container">
+            <!-- Header -->
+            <header class="chat-header">
+                <div class="header-info">
+                    <div class="avatar-bot">
+                        <span>🐍</span>
+                    </div>
+                    <div>
+                        <div class="bot-name-row">
+                            <h1>Python Question-Answering Chatbot</h1>
+                            <span class="status-indicator">Online</span>
+                        </div>
+                        <p class="header-desc">Ask any question in natural language about Python syntax, data structures, OOP, or concepts.</p>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Chat Messages Log -->
+            <section class="messages-container" id="messages-container">
+                <!-- Welcome Bot Message -->
+                <div class="message bot-message">
+                    <div class="msg-avatar">🐍</div>
+                    <div class="msg-content">
+                        <div class="msg-bubble">
+                            <p><strong>Hello! I am your personal Python Question-Answering Chatbot.</strong></p>
+                            <p>I can help you understand Python programming concepts, syntax, methods, and best practices using natural language processing. Try asking:</p>
+                            <div class="suggestion-chips">
+                                <button class="chip" onclick="askSuggestion(this)">What is the difference between list and tuple?</button>
+                                <button class="chip" onclick="askSuggestion(this)">How do *args and **kwargs work?</button>
+                                <button class="chip" onclick="askSuggestion(this)">What is list comprehension in Python?</button>
+                                <button class="chip" onclick="askSuggestion(this)">Explain decorators in Python</button>
+                            </div>
+                        </div>
+                        <span class="msg-timestamp">Just now</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Typing indicator -->
+            <div class="typing-indicator" id="typing-indicator">
+                <div class="msg-avatar">🐍</div>
+                <div class="dots-bubble">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+
+            <!-- Input area -->
+            <div class="input-container">
+                <form id="chat-form" onsubmit="handleSend(event)">
+                    <div class="input-wrapper">
+                        <input
+                            type="text"
+                            id="query-input"
+                            placeholder="Ask a Python question (e.g. 'How does try-except work in Python?')..."
+                            autocomplete="off"
+                            required
+                        >
+                        <button type="submit" id="send-btn" aria-label="Send Message">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+                <div class="input-hints">
+                    <span>Press <strong>Enter</strong> to send • NLP Powered Predefined Knowledge Base</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
